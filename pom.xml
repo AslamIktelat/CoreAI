@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.core.ai</groupId>
 	<artifactId>CoreAI</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${dependency.version}</version>
 	<name>CoreAI</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
@@ -20,7 +20,7 @@
 		<java.version>17</java.version>
 		<spring-ai.version>1.1.2</spring-ai.version>
         <jar.name>core-ai</jar.name>
-
+        <dependency.version>v1-Duel-LLM</dependency.version>
     </properties>
 	<dependencies>
         <dependency>
