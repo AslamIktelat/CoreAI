@@ -9,7 +9,7 @@ public class AgentService {
     @Autowired
     ChatClientService chatClientService;
 
-    // Bot calls it
+    // User call this method to execute a task, the task will be passed to the chatClientService to be executed and the result will be returned to the user
     public Object execute(String task)
     {
        return chatClientService.call(null,task);

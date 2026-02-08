@@ -1,7 +1,6 @@
 package com.core.ai.CoreAI.agentPersona;
 
 import com.core.ai.CoreAI.tools.MCPTool;
-
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.support.ToolCallbacks;
@@ -38,7 +37,6 @@ public class AgentPersona {
 
     public ToolCallback[] getCallBackTools()
     {
-
        return ToolCallbacks.from(toolsList.toArray());
     }
 }

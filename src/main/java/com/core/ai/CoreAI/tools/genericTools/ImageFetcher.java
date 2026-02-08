@@ -1,7 +1,7 @@
-package com.core.ai.CoreAI.tools;
+package com.core.ai.CoreAI.tools.genericTools;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.core.ai.CoreAI.tools.MCPTool;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.stereotype.Component;
@@ -11,13 +11,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.file.Paths;
 
 
 @Component("ImageFetcher")
-public class ImageFetcher implements MCPTool{
+public class ImageFetcher implements MCPTool {
 
-    private static final Logger log = LoggerFactory.getLogger(ImageFetcher.class);
 
     @Tool(name = "image_fetcher", description = "Fetches an image from a URL and saves it to the host")
     public String fetchImageUrl(@ToolParam(description = "This is the url to the image to download") String imageUrl,
@@ -48,7 +46,7 @@ public class ImageFetcher implements MCPTool{
             }
 
         } catch (Exception e) {
-            log.error("e :",e);
+
             return "Failed to fetch image: " + e.getMessage();
         }
     }
@@ -62,7 +60,7 @@ public class ImageFetcher implements MCPTool{
         }
         catch (IOException ioException)
         {
-            log.error("e: ", ioException);
+
             return false;
         }
 

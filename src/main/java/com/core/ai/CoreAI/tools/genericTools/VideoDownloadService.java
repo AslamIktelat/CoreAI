@@ -1,17 +1,17 @@
-package com.core.ai.CoreAI.tools;
+package com.core.ai.CoreAI.tools.genericTools;
 
+import com.core.ai.CoreAI.tools.MCPTool;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 
 @Component("VideoFetcher")
-public class VideoDownloadService implements MCPTool{
+public class VideoDownloadService implements MCPTool {
 
     @Tool(name = "video_fetcher", description = "Fetches a video from a URL and saves it to the host")
     public String videoFetcher(@ToolParam(description = "This is the url to the video to download") String url) {
