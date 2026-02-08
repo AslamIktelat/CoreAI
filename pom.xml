@@ -14,7 +14,7 @@
 	<name>CoreAI</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
-
+    <packaging>jar</packaging>
 
 	<properties>
 		<java.version>17</java.version>
@@ -67,78 +67,90 @@
 		</dependencies>
 	</dependencyManagement>
 
-	<build>
+<!--	<build>-->
 
-        <finalName> ${jar.name}</finalName>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <annotationProcessorPaths>
-                            <path>
-                                <groupId>org.projectlombok</groupId>
-                                <artifactId>lombok</artifactId>
-                            </path>
-                        </annotationProcessorPaths>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <configuration>
-                        <excludes>
-                            <exclude>
-                                <groupId>org.projectlombok</groupId>
-                                <artifactId>lombok</artifactId>
-                            </exclude>
-                        </excludes>
-                    </configuration>
-                </plugin>
-
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <configuration>
-                        <!-- DO NOT include log4j.properties file in your Jar -->
-                        <excludes>
-                            <exclude>**/log4j.properties</exclude>
-                        </excludes>
-                        <archive>
-                            <manifest>
-                                <!-- Jar file entry point -->
-                                <mainClass>com.core.ai.CoreAI.CoreAiApplication</mainClass>
-                            </manifest>
-                        </archive>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>io.fabric8</groupId>
-                    <artifactId>docker-maven-plugin</artifactId>
-                    <version>0.38.1</version>
-                    <executions>
-                        <execution>
-                            <id>build</id>
-                            <phase>pre-integration-test</phase>
-                            <goals>
-                                <goal>build</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-
-                        <buildArgs>
-                            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-                        </buildArgs>
-                    </configuration>
-                </plugin>
-            </plugins>
+<!--        <finalName> ${jar.name}</finalName>-->
+<!--            <plugins>-->
+<!--                <plugin>-->
+<!--                    <groupId>org.apache.maven.plugins</groupId>-->
+<!--                    <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                    <configuration>-->
+<!--                        <annotationProcessorPaths>-->
+<!--                            <path>-->
+<!--                                <groupId>org.projectlombok</groupId>-->
+<!--                                <artifactId>lombok</artifactId>-->
+<!--                            </path>-->
+<!--                        </annotationProcessorPaths>-->
+<!--                    </configuration>-->
+<!--                </plugin>-->
+<!--                <plugin>-->
+<!--                    <groupId>org.springframework.boot</groupId>-->
+<!--                    <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                    <configuration>-->
+<!--                        <excludes>-->
+<!--                            <exclude>-->
+<!--                                <groupId>org.projectlombok</groupId>-->
+<!--                                <artifactId>lombok</artifactId>-->
+<!--                            </exclude>-->
+<!--                        </excludes>-->
+<!--                    </configuration>-->
+<!--                </plugin>-->
 
 
+<!--                <plugin>-->
+<!--                    <groupId>org.apache.maven.plugins</groupId>-->
+<!--                    <artifactId>maven-jar-plugin</artifactId>-->
+<!--                    <configuration>-->
+<!--                        &lt;!&ndash; DO NOT include log4j.properties file in your Jar &ndash;&gt;-->
+<!--                        <excludes>-->
+<!--                            <exclude>**/log4j.properties</exclude>-->
+<!--                        </excludes>-->
+<!--                        <archive>-->
+<!--                            <manifest>-->
+<!--                                &lt;!&ndash; Jar file entry point &ndash;&gt;-->
+<!--                                <mainClass>com.core.ai.CoreAI.CoreAiApplication</mainClass>-->
+<!--                            </manifest>-->
+<!--                        </archive>-->
+<!--                    </configuration>-->
+<!--                </plugin>-->
+<!--                <plugin>-->
+<!--                    <groupId>io.fabric8</groupId>-->
+<!--                    <artifactId>docker-maven-plugin</artifactId>-->
+<!--                    <version>0.38.1</version>-->
+<!--                    <executions>-->
+<!--                        <execution>-->
+<!--                            <id>build</id>-->
+<!--                            <phase>pre-integration-test</phase>-->
+<!--                            <goals>-->
+<!--                                <goal>build</goal>-->
+<!--                            </goals>-->
+<!--                        </execution>-->
+<!--                    </executions>-->
+<!--                    <configuration>-->
+
+<!--                        <buildArgs>-->
+<!--                            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>-->
+<!--                        </buildArgs>-->
+<!--                    </configuration>-->
+<!--                </plugin>-->
+<!--            </plugins>-->
 
 
 
-	</build>
+
+
+<!--	</build>-->
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

@@ -38,7 +38,6 @@ public class AgentPersona {
 
     public ToolCallback[] getCallBackTools()
     {
-
        return ToolCallbacks.from(toolsList.toArray());
     }
 }

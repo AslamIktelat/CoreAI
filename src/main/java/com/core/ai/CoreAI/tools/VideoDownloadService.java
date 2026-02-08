@@ -16,8 +16,6 @@ public class VideoDownloadService implements MCPTool{
     @Tool(name = "video_fetcher", description = "Fetches a video from a URL and saves it to the host")
     public String videoFetcher(@ToolParam(description = "This is the url to the video to download") String url) {
 
-
-
         try  {
             Process process2 = new ProcessBuilder("yt-dlp",url).directory(new File("Downloads/")).start();
             BufferedReader reader = new BufferedReader(new InputStreamReader(process2.getInputStream()));

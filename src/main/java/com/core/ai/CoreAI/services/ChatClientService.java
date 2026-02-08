@@ -3,48 +3,56 @@ package com.core.ai.CoreAI.services;
 
 import com.core.ai.CoreAI.agentPersona.AgentFilesHandler;
 import com.core.ai.CoreAI.agentPersona.AgentPersona;
-import com.core.ai.CoreAI.tools.ImageFetcher;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.Prompt;
-import org.springframework.ai.support.ToolCallbacks;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
-
-import static com.core.ai.CoreAI.constants.Constants.*;
 
 @Service
 public class ChatClientService  {
-    AgentPersona agentPersona;
-    private final ChatClient chatClient;
 
-    public ChatClientService(ChatClient chatClient, AgentFilesHandler agentFilesHandler)  {
-        this.chatClient = chatClient;
-        try {
-            agentPersona=agentFilesHandler.readAgentPersona(AGENT_PERSONA_FULL_PATH);
-        }
-        catch (IOException exception)
-        {
-            System.out.println(" ");
-            agentPersona=new AgentPersona(DEFAULT_AGENT_PERSONA,DEFAULT_AGENT_PERSONA,null);
-        }
+    AgentPersona safetyagentPersona;
+    AgentPersona ruleragentPersona;
+
+    private final ChatClient safetyChatClient;
+    private final ChatClient ruleChatClient;
+
+
+    public ChatClientService(@Qualifier("ai/llama3.1") ChatClient safetyChatClient, @Qualifier("ai/llama3.1") ChatClient ruleChatClient, AgentFilesHandler agentFilesHandler, @Value("${safety.agent.persona.path}") String filepathS,@Value("${ruler.agent.persona.path}") String filepathR)  {
+        this.safetyChatClient = safetyChatClient;
+        this.ruleChatClient=ruleChatClient;
+        safetyagentPersona=agentFilesHandler.readAgentPersona(filepathS);
+        ruleragentPersona=agentFilesHandler.readAgentPersona(filepathR);
+
+
     }
 
 
-    public Object call( Class entity,String task) {
-        List<Message> messages =agentPersona.introductionMessages();
+    public Object callSafety( Class entity,String task) {
+        List<Message> messages =safetyagentPersona.introductionMessages();
         messages.add(new UserMessage("Task: " + task));
-       // messages.add(new AssistantMessage("format the response to json to match the structure of 'post','media','metadata' only"));
         Prompt prompt= Prompt.builder().messages(messages).build();
         if(entity != null)
-            return chatClient.prompt(prompt).call().entity(entity);
+            return safetyChatClient.prompt(prompt).call().entity(entity);
         else
-            return chatClient.prompt(prompt).toolCallbacks(agentPersona.getCallBackTools()).call().content();
+            return safetyChatClient.prompt(prompt).call().content();
+    }
+
+
+
+    public Object callRuler( Class entity,String task) {
+        List<Message> messages =ruleragentPersona.introductionMessages();
+        messages.add(new UserMessage("Task: " + task));
+        Prompt prompt= Prompt.builder().messages(messages).build();
+        if(entity != null)
+            return ruleChatClient.prompt(prompt).call().entity(entity);
+        else
+            return ruleChatClient.prompt(prompt).call().content();
     }
 
 

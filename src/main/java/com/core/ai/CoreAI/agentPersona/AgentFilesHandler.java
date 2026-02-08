@@ -9,18 +9,26 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static com.core.ai.CoreAI.constants.Constants.DEFAULT_AGENT_PERSONA;
+
 @Service
 public class AgentFilesHandler {
     private final ObjectMapper objectMapper;
     private final ToolManager toolManager;
 
-    public AgentFilesHandler(ObjectMapper objectMapper, ToolManager toolManager) {
-        this.objectMapper = objectMapper;
+    public AgentFilesHandler(ToolManager toolManager) {
+        this.objectMapper = new ObjectMapper();
         this.toolManager = toolManager;
     }
-    public AgentPersona readAgentPersona(String filePath) throws IOException {
-        AgentPersonaV1 agentPersonaV1= objectMapper.readValue(new java.io.File(filePath), AgentPersonaV1.class);
-        return convertV1(agentPersonaV1);
+    public AgentPersona readAgentPersona(String filePath)  {
+        try {
+            AgentPersonaV1 agentPersonaV1 = objectMapper.readValue(new java.io.File(filePath), AgentPersonaV1.class);
+            return convertV1(agentPersonaV1);
+        }
+        catch (IOException exception)
+        {
+            return new AgentPersona(DEFAULT_AGENT_PERSONA,DEFAULT_AGENT_PERSONA,null);
+        }
     }
 
     private AgentPersona convertV1(AgentPersonaV1 agentPersonaV1) {
