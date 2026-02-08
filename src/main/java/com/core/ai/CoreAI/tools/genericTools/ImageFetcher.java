@@ -1,5 +1,6 @@
-package com.core.ai.CoreAI.tools;
+package com.core.ai.CoreAI.tools.genericTools;
 
+import com.core.ai.CoreAI.tools.MCPTool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.tool.annotation.Tool;
@@ -11,11 +12,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.file.Paths;
 
 
 @Component("ImageFetcher")
-public class ImageFetcher implements MCPTool{
+public class ImageFetcher implements MCPTool {
 
     private static final Logger log = LoggerFactory.getLogger(ImageFetcher.class);
 
