@@ -2,6 +2,9 @@
 
 A powerful Java-based artificial intelligence framework designed to simplify AI integration and development.
 
+# This version has one LLM to keep it simple 🔧
+
+
 ## 📋 Table of Contents
 
 - [About](#about)
