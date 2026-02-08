@@ -22,7 +22,7 @@ public class ChatClientService  {
     private final ChatClient safetyChatClient;
     private final ChatClient ruleChatClient;
 
-
+    //* * TODO :: Make sure use different LLMs here  * *//
     public ChatClientService(@Qualifier("ai/llama3.1") ChatClient safetyChatClient, @Qualifier("ai/llama3.1") ChatClient ruleChatClient, AgentFilesHandler agentFilesHandler, @Value("${safety.agent.persona.path}") String filepathS,@Value("${ruler.agent.persona.path}") String filepathR)  {
         this.safetyChatClient = safetyChatClient;
         this.ruleChatClient=ruleChatClient;
