@@ -1,6 +1,7 @@
 # CoreAI
 
 A powerful Java-based artificial intelligence framework designed to simplify AI integration and development.
+# This version has 2 LLMs !! to optimize the results 🔥 
 
 ## 📋 Table of Contents
 
